@@ -13,7 +13,7 @@ env:
 
 jobs:
 
-  build_image:
+  build_docker_image:
     name: Build & Push Docker Image
     runs-on: ubuntu-latest
 
