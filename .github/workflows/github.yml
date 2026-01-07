@@ -48,4 +48,5 @@ jobs:
 
       - name: Run Bandit security scan
         run: |
-          bandit -r app -ll
+          bandit -r calculator -ll
+          bandit -r tests -ll
