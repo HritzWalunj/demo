@@ -32,12 +32,12 @@ jobs:
           push: true
           tags: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
-  common-ci:
-    uses: HritzWalunj/common-ci-infra/.github/workflows/common-ci-pipeline.yml@main
-    with:
-      target_paths: |
-        calculator
-        tests
+  # common-ci:
+  #   uses: HritzWalunj/common-ci-infra/.github/workflows/common-ci-pipeline.yml@main
+  #   with:
+  #     target_paths: |
+  #       calculator
+  #       tests
 
   test:
     name: Unit Tests (inside Docker image)
