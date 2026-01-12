@@ -7,6 +7,13 @@ env:
   IMAGE_TAG: v1
 
 jobs:
+  common-ci:
+    uses: HritzWalunj/common-ci-infra/.github/workflows/common-ci-pipeline.yml@main
+    with:
+      target_paths: |
+        calculator
+        tests
+
   build_docker_image:
     name: Build & Push Docker Image
     runs-on: ubuntu-latest
@@ -31,13 +38,6 @@ jobs:
           file: docker/Dockerfile.demo
           push: true
           tags: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
-
-  common-ci:
-    uses: HritzWalunj/common-ci-infra/.github/workflows/common-ci-pipeline.yml@main
-    with:
-      target_paths: |
-        calculator
-        tests
 
   test:
     name: Unit Tests (inside Docker image)
