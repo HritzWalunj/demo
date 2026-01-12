@@ -6,6 +6,11 @@ env:
   IMAGE_NAME: hrituja/python-pytest
   IMAGE_TAG: v1
 
+env:
+  IMAGE_NAME: hrituja/python-pytest
+  IMAGE_TAG: v1
+
+
 jobs:
   common-ci:
     uses: HritzWalunj/common-ci-infra/.github/workflows/common-ci-pipeline.yml@main
