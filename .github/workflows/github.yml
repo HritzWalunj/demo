@@ -1,10 +1,10 @@
-name: Python CI Pipeline
+name: CI
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+on: [push, pull_request]
+
+env:
+  IMAGE_NAME: hrituja/python-pytest
+  IMAGE_TAG: v1
 
 env:
   IMAGE_NAME: hrituja/python-pytest
@@ -12,6 +12,12 @@ env:
 
 
 jobs:
+  common-ci:
+    uses: HritzWalunj/common-ci-infra/.github/workflows/common-ci-pipeline.yml@main
+    with:
+      target_paths: |
+        calculator
+        tests
 
   build_docker_image:
     name: Build & Push Docker Image
@@ -53,45 +59,3 @@ jobs:
       - name: Run pytest
         run: pytest
 
-  # test:
-  #   name: Unit Tests
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
-
-  #     - name: Set up Python
-  #       uses: actions/setup-python@v5
-  #       with:
-  #         python-version: "3.10"
-
-  #     - name: Install dependencies
-  #       run: |
-  #         python -m pip install --upgrade pip
-  #         pip install -r requirements.txt
-
-  #     - name: Run pytest
-  #       run: pytest
-
-  security:
-    name: Security Scan (Bandit)
-    runs-on: ubuntu-latest
-    needs: test   # runs only if tests pass
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
-
-      - name: Install Bandit
-        run: |
-          pip install bandit
-
-      - name: Run Bandit security scan
-        run: |
-          bandit -r calculator -ll
-          bandit -r tests -ll
