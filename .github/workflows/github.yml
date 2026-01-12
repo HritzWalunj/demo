@@ -42,7 +42,7 @@ jobs:
   test:
     name: Unit Tests (inside Docker image)
     runs-on: ubuntu-latest
-    # needs: build_docker_image
+    needs: build_docker_image
 
     container:
       image: hrituja/python-pytest:v1
